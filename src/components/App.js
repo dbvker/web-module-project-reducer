@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from '../reducers';
-import { applyNumber, changeOperation } from '../actions';
+import { applyNumber, changeOperation, clearDisplay, memoryAdd, memoryCombine, memoryClear } from '../actions';
 
 import './App.css';
 
@@ -16,6 +16,22 @@ function App() {
 
   const changeOperatorHandler = (operator) => {
     dispatch(changeOperation(operator));
+  };
+
+  const clearDisplayHandler = () => {
+    dispatch(clearDisplay());
+  };
+
+  const memoryAddHandler = () => {
+    dispatch(memoryAdd());
+  };
+
+  const memoryCombineHandler = () => {
+    dispatch(memoryCombine());
+  };
+
+  const memoryClearHandler = () => {
+    dispatch(memoryClear());
   };
 
   return (
@@ -35,9 +51,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={() => memoryAddHandler()} />
+              <CalcButton value={"MR"} onClick={() => memoryCombineHandler()} />
+              <CalcButton value={"MC"} onClick={() => memoryClearHandler()} />
             </div>
 
             <div className="row">
@@ -65,7 +81,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={() => clearDisplayHandler()} />
             </div>
 
           </form>
